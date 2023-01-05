@@ -1,0 +1,35 @@
+{% extends 'myapp/alumni_base.html' %}
+{% load static %}
+{% block title %}My Posts{% endblock %}
+{% block body %}
+<center><br><br><br><br>
+    <h2>Add New Post</h2>
+	<div class="container">
+    <form role="form" name="frm" action="{% url 'alumni_posts_add' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+	<div class="form-group">
+		<label for="title">Title</label>
+		<input type="text" class="form-control" id="title" name="title" placeholder="Title"></td>
+	</div>
+    <div class="form-group">
+		<label for="descr">Description</label>
+		<input type="text" class="form-control" id="descr" name="descr" placeholder="Description Name"></td>
+	</div>
+	<div class="form-group">
+		<label for="pic">Picture</label>
+		<input type="file" class="form-control" id="pic" name="pic" placeholder="" accept="image/x-png,image/gif,image/jpeg,video/mp4"></td>
+	</div>
+{{msg}}
+    <br>
+
+	    <button type="submit" class="btn btn-info" id="bt" name="bt">Upload</button>
+        <button type="reset" class="btn btn-info" id="rt" name="rt">Reset</button>
+	    </table>
+    </form>
+
+
+	</div>
+</center>
+
+{% endblock %}

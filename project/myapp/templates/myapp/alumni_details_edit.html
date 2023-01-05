@@ -1,0 +1,97 @@
+{% extends 'myapp/alumni_base.html' %}
+{% load static %}
+{% block title %}Profile Update{% endblock %}
+{% block body %}
+<center><br><br><br><br>
+    <h2>Alumni Details Update</h2>
+	<br>
+	<a href="{%url 'alumni_profile_pic_update'%}">
+	<img src="../static/myapp/media/{{ud.pic}}" width="100px" height="100px">
+	</a>
+	<br>
+
+
+	<div class="container">
+    <form role="form" name="frm" action="{% url 'alumni_details_edit' %}" method="post"  enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+			<label for="name">Name</label>
+	        <input class="form-control" type="text"  id="name" name="name" value="{{ud.name}}" required="required">
+		</div>
+		{%if ud.gender == 'Male'%}
+	    <div class="form-group">
+            <label>Gender :</label>
+			<div class="custom-control custom-radio custom-control-inline">
+  				<input type="radio" class="custom-control-input" id="gender1" name="gender" value="Male" checked>
+  				<label class="custom-control-label" for="gender1">Male</label>
+				<input type="radio" class="custom-control-input" id="gender2" name="gender" value="Female">
+  				<label class="custom-control-label" for="gender2">Female</label>
+			</div>
+<!--			<div class="custom-control custom-radio custom-control-inline">-->
+<!--  				-->
+<!--			</div>-->
+		</div>
+		{%else%}
+		<div class="form-group">
+            <label>Gender :</label>
+			<div class="custom-control custom-radio custom-control-inline">
+  				<input type="radio" class="custom-control-input" id="gender3" name="gender" value="Male" >
+  				<label class="custom-control-label" for="gender3">Male</label>
+
+				<input type="radio" class="custom-control-input" id="gender4" name="gender" value="Female" checked>
+  				<label class="custom-control-label" for="gender4">Female</label>
+			</div>
+<!--			<div class="custom-control custom-radio custom-control-inline">-->
+<!--  				-->
+<!--			</div>-->
+		</div>
+		{%endif%}
+        <div class="form-group">
+			<label for="dob">Date of Birth</label>
+	        <input type="date"  class="form-control" id="dob" name="dob" value="{{ud.dob}}" required>
+		</div>
+
+
+	    <div class="form-group">
+			<label for="addr">Address</label>
+	        <input class="form-control" type="text"  id="addr" name="addr" value="{{ud.addr}}" >
+            <input type="text"  class="form-control" id="pin" name="pin" value="{{ud.pin}}" >
+		</div>
+	    <div class="form-group">
+			<label for="contact1">Contact</label>
+	        <input type="text"  class="form-control" id="contact1" name="contact" value="{{ud.contact}}">
+		</div>
+		<div class="form-group">
+			<label for="email">Email</label>
+	        <input type="email" class="form-control" id="email" name="email" value="{{ud.email}}"></td>
+		</div>
+
+	    <button type="submit" class="btn btn-info" id="bt" name="bt">Update</button>
+        <button type="reset" class="btn btn-info" id="rt" name="rt">Reset</button>
+	    </table>
+    </form>
+	{{msg}}
+	</div>
+</center>
+<style>
+	.hide {
+  		display: none;
+		}
+
+		.form-group{
+		width:50%;
+		}
+</style>
+
+<script>
+
+function show1(){
+  document.getElementById('div1').style.display ='block';
+}
+function show2(){
+  document.getElementById('div1').style.display = 'none';
+}
+
+</script>
+
+{% endblock %}

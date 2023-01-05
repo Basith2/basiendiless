@@ -1,0 +1,55 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+
+{% block body %}
+<center><br><br><br>
+    <h1>Event Details Edit</h1>
+    <div class="container">
+    <form name="frm" role="form" action="{% url 'admin_event_details_edit'%}" method="post">
+        {% csrf_token %}
+        <div class="bgbgb">
+        <div class="form-group">
+            <label for="ename">Event Name</label>
+            <input class="form-control" type="text" name="ename" id="ename" value="{{ed.ename}}" placeholder="Event Name">
+        </div>
+        <div class="form-group">
+            <label for="description">description</label>
+            <textarea class="form-control" style="width:50%;" name="description" id="description"  >{{ed.description}}</textarea>
+        </div>
+        <table>
+
+            <tr>
+            <td style="width:50%">
+            <div class="form-group">
+            <label for="dt">Date</label>
+            <input class="form-control" type="date" name="dt" id="dt" value="{{ed.dt}}" required>
+            </div>
+            </td>
+            <td style="width:50%">
+            <div class="form-group">
+            <label for="dt">Time</label>
+            <input class="form-control" type="time" name="tm" id="tm" value="{{ed.tm}}" required>
+            </div>
+            </td>
+            </tr>
+        </table>
+            <input name="eid" id="eid" type="hidden" value="{{eid}}">
+        <button type="submit"
+        class="btn btn-info" id="bt" name="bt">Submit</button>
+        <button type="reset"
+        class="btn btn-info" id="rt" name="rt">Reset</button>
+            </div>
+    </form>
+    </div>
+    <h3>{{msg}}</h3>
+</center>
+<style>
+    input[type=text]{
+    width:50%;
+    }
+    .bgbgb{
+    background:#c2f8ff;
+    }
+
+</style>
+{% endblock %}

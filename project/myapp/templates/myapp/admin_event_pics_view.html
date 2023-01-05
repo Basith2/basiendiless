@@ -1,0 +1,77 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+
+{% block body %}
+<center><br><br><br><br>
+    <div class="container1">
+    <form name="frm" role="form" action="#" method="post">
+        {% csrf_token %}
+
+
+<!--<th>-->
+
+<!--            <img src="../static/myapp/media/{{ ep.pic }}"  width="250" height="250">-->
+<!--               <a class="btn btn-danger" href="../admin_event_pics_delete?id={{ep.id}}&event_id={{event_id}}">Delete {{ep.id}}</a>-->
+
+
+<!--</th>-->
+<a href="../admin_event_pics_add?event_id={{event_id}}" class="btn btn-primary">New Image</a><br><br>
+
+
+        <div class="Div1">
+{%for ep in pic_list%}
+
+<div class="col-sm-">
+
+  <img class="card-img-top" src="../static/myapp/media/{{ ep.pic }}" alt="Card image cap"><br>
+  <div class="card-block">
+    <a href="../admin_event_pics_delete?id={{ep.id}}&event_id={{event_id}}" class="btn btn-primary">Delete</a>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+{%endfor%}
+        </div>
+<h3>{{msg}}</h3>
+    </form>
+    </div>
+</center>
+<style>
+    .div-border{
+    border: 2px solid black;
+
+    }
+
+
+
+.container1 {
+
+    width: 30em;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+
+img{border:2px solid #f71402;}//border-radius: 25px;
+
+//.Div1{background-color:rgb(207, 250, 232, 0.8)}
+.Div1{background-color:rgb(207, 250, 232, 0.8)}
+
+</style>
+{% endblock %}
+
+
+
+
+
+
+
+
+

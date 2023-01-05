@@ -1,0 +1,34 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+{%block title%}{%endblock%}
+{% block body %}
+<center><br><br><br>
+    <div class="container">
+    <form name="frm" role="form" action="{% url 'admin_event_pics_add'%}" method="post"
+          enctype="multipart/form-data">
+        {% csrf_token %}
+      <br>
+
+      <h1>Event Pics Add</h1>
+        <div class="form-group">
+            <label for="document">Select Image</label>
+            <input class="form-control" type="file" name="document" id="document" placeholder="Select Image"
+            accept="image/x-png,image/gif,image/jpeg" />
+            <input  type="hidden" name="event_id" id="event_id" value="{{event_id}}">
+        </div>
+        <button type="submit" class="btn btn-info" id="bt" name="bt">Submit</button>
+        <button type="reset" class="btn btn-info" id="rt" name="rt">Reset</button>
+    </form>
+        <h3>{{msg}}</h3>
+    </div>
+
+</center>
+<style>
+  input[type=file]{
+  width:50%;
+  }
+
+
+
+</style>
+{% endblock %}

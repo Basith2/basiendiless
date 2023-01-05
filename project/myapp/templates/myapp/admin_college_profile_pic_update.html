@@ -1,0 +1,23 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+
+{% block body %}
+<center><br><br><br>
+    <h1>Profile Pic</h1>
+    <div class="container">
+    <form name="frm" role="form" action="{% url 'admin_college_profile_pic_update'%}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="pic">Select Picture:</label>
+            <input class="form-control" type="file" name="pic" id="pic" >
+        </div>
+
+        <button type="submit"
+        class="btn btn-info" id="bt" name="bt">Upload</button>
+        <button type="reset"
+        class="btn btn-info" id="rt" name="rt">Reset</button>
+    </form>
+    </div>
+    <h3>{{msg}}</h3>
+</center>
+{% endblock %}

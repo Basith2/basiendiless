@@ -1,0 +1,100 @@
+{% extends 'myapp/alumni_base.html' %}
+{% load static %}
+{% block title %}Alumni Home{% endblock %}
+{% block body %}
+
+<center><br><br><br><br>
+
+    <div class="container">
+    <form role="form" name="frm" action="" method="post">
+        {% csrf_token %}
+
+
+        	<section class="main-content">
+		<div class="container">
+<!--			<h1 class="text-center text-uppercase">Social Media Post</h1>-->
+			<br>
+			<br>
+			{% for p in post_list %}
+			<div class="row">
+				<div class="col-sm-6 offset-sm-3">
+					<div class="post-block">
+						<div class="d-flex justify-content-between">
+							<div class="d-flex mb-3">
+                                {%for a in al_list%}
+                                {%if a.user_id == p.alumni_id%}
+								<div class="mr-2 ng-if">
+									<a href="../alumni_profile_view?id={{a.id}}" class="text-dark">
+                                        <img src="../static/myapp/media/{{a.pic}}" alt="User" class="author-img" >
+                                    </a>
+								</div>
+								<div>
+									<h5 class="mb-0"><a href="../alumni_profile_view?id={{a.id}}" class="text-dark">{{a.name}}</a></h5>
+								</div>
+                                {%endif%}
+                                {%endfor%}
+							</div>
+						</div>
+
+						<div class="post-block__content mb-2">
+                            <h5>{{p.title}}</h5>
+							<p>{{p.descr}}</p>
+							<a href="../static/myapp/media/{{p.pic_path}}">
+								<embed src="../static/myapp/media/{{p.pic_path}}" alt="Content img" >
+							</a>
+						</div>
+
+					</div>
+				</div>
+			</div>
+            {%endfor%}
+		</div>
+
+	</section>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="{%static 'myapp/assets1/css/style.css'%}">
+
+
+<!--        <table class="table table-striped table-bordered">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th>Id</th>-->
+<!--                <th>Title</th>-->
+<!--                <th>Picture</th>-->
+<!--                <th>Description</th>-->
+<!--&lt;!&ndash;                <th>Action</th>&ndash;&gt;-->
+
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            {% for p in post_list %}-->
+<!--            <tbody>-->
+<!--            <tr>-->
+
+<!--                <td>{{ p.id }}</td>-->
+<!--                <td>{{ p.title  }} </td>-->
+<!--                <td><img src="../static/myapp/media/{{p.pic_path}}" width="135px" height="135px"></td>-->
+<!--                <td>{{ p.descr  }}</td>-->
+<!--&lt;!&ndash;                <td><a href="../alumni_posts_delete?id={{p.id}}">Delete</a></td>&ndash;&gt;-->
+
+<!--            </tr>-->
+<!--            <tbody>-->
+<!--            {% endfor %}-->
+<!--        </table>-->
+<!--        <a href="{%url 'alumni_posts_add'%}">New Post</a>-->
+    </form>
+    </div>
+
+
+
+</center>
+<style>
+	.post-block{border:2px solid blue;border-radius: 25px;width:100%}
+</style>
+{% endblock %}

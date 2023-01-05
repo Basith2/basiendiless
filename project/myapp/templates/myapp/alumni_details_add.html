@@ -1,0 +1,164 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block title %}Alumni Registration{% endblock %}
+{% block body %}
+<center><br><br><br><br><br><br><br>
+    <h2>Alumni Registration</h2>
+	<div class="container">
+    <form role="form" name="frm" action="{% url 'alumni_details_add' %}" method="post" onload="return show2()" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+			<label for="name">Name</label>
+	        <input class="form-control" type="text"  id="name" name="name" placeholder="Name" required="required">
+		</div>
+
+	    <div class="form-group">
+            <label>Gender :</label>
+			<div class="custom-control custom-radio custom-control-inline form">
+  				<input type="radio" class="custom-control-input" id="gender1" name="gender" value="Male">
+  				<label class="custom-control-label" for="gender1">Male</label>&nbsp;
+				<input type="radio" class="custom-control-input" id="gender2" name="gender" value="Female">
+  				<label class="custom-control-label" for="gender2">Female</label>
+			</div>
+			<p id="valg" style="color:red">{{val1}}</p>
+<!--			<div class="custom-control custom-radio custom-control-inline">-->
+
+<!--			</div>-->
+		</div>
+        <div class="form-group">
+			<label for="contact1">Date of Birth</label>
+	        <input type="date"  class="form-control" id="dob" name="dob" required onclick="return valGender()">
+		</div>
+		<div class="form-group">
+			<label for="name">Upload your Photo</label>
+	        <input class="form-control" type="file" id="pic" name="pic" placeholder="Select a Picture" required="required">
+		</div>
+
+		<div class="form-group">
+			<label for="name">Upload your Id card or Bonafide Certificate</label>
+	        <input class="form-control" type="file" id="id_pic" name="id_pic" placeholder="" required="required">
+		</div>
+
+		<div class="form-group">
+            <label for="branch_id">Branch</label>
+            <select class="form-control" id="branch_id"  name="branch_id">
+				<option value="0">Select Branch</option>
+                {% for  b in branch_list%}
+                <option value="{{b.id}}">{{b.branch_name}} ({{b.branch_code}})</option>
+                {% endfor %}
+            </select>
+        </div>
+
+
+		<div class="form-group">
+            <label for="pass_year">Passing Year</label>
+            <select class="form-control" id="pass_year"  name="pass_year">
+				<option value="2013 - 2017">1996 - 2000</option>
+				<option value="2014 - 2018">1997 - 2001</option>
+				<option value="2015 - 2019">2015 - 2019</option>
+				<option value="2016 - 2020">2016 - 2020</option>
+				<option value="2017 - 2021">2017 - 2021</option>
+				<option value="2018 - 2022">2018 - 2022</option>
+				<option value="2019 - 2023">2019 - 2023</option>
+            </select>
+        </div>
+
+<!--		<div class="form-group">-->
+<!--		<label for="email">Passing Year</label>-->
+<!--		<input type="number" class="form-control" id="pass_year" name="pass_year" min="1900" max="2023"></td>-->
+<!--		</div>-->
+
+	    <div class="form-group">
+			<label for="addr">Address</label>
+	        <input class="form-control" type="text"  id="addr" name="addr" placeholder="Street" >
+            <input type="text"  class="form-control" id="pin" name="pin" placeholder="pin" maxlength="6" minlength="6">
+		</div>
+	    <div class="form-group">
+			<label for="contact1">Contact</label>
+	        <input type="text"  class="form-control" id="contact1" name="contact" maxlength="10"
+				  minlength="10" placeholder="Enter contact">
+		</div>
+		<div class="form-group">
+			<label for="email">Email</label>
+	        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email id" onkeyup="return emailVal()"></td>
+			<p id="demo" style="color:red"></p>
+		</div>
+		<p>Are You Working ?</p>
+		<input type="radio" name="tab" value="Yes" onclick="show1();" />
+		<span style="color:blue">Yes</span>
+		<input type="radio" name="tab" value="No" onclick="show2();" checked/>
+		<span style="color:blue">No</span>
+<div id="div1" class="hide" >
+  <hr><p>Enter Details...</p>
+	<div class="form-group">
+		<label for="email">Title</label>
+		<input type="text" class="form-control" id="job_title" name="job_title" placeholder="Job Title"></td>
+	</div>
+    <div class="form-group">
+		<label for="email">Organization Name</label>
+		<input type="text" class="form-control" id="org_name" name="org_name" placeholder="Organization Name"></td>
+	</div>
+	<div class="form-group">
+		<label for="email">Address</label>
+		<input type="text" class="form-control" id="org_addr" name="org_addr" placeholder="org_addr"></td>
+	</div>
+	<div class="form-group">
+		<label for="email">PIN</label>
+		<input type="text" class="form-control" id="org_pin" name="org_pin" placeholder="PIN"></td>
+	</div>
+</div><br>
+        <div class="form-group">
+			<label for="pwd">Password</label>
+	        <input type="password" class="form-control" id="pwd" name="pwd"></td>
+		</div>
+	    <button type="submit" class="btn btn-info" id="bt" name="bt">Register</button>
+        <button type="reset" class="btn btn-info" id="rt" name="rt">Reset</button>
+
+    </form>
+	{{msg}}
+	</div>
+</center>
+<style>
+    .form-control{width:50%}
+</style>
+
+<style>
+	.hide {
+  		display: none;
+		}
+
+label,p{color:blue;}
+
+</style>
+
+<script>
+
+function show1(){
+  document.getElementById('div1').style.display ='block';
+}
+function show2(){
+  document.getElementById('div1').style.display = 'none';
+}
+
+</script>
+<script>
+function emailVal(){
+let text = document.getElementById("email").value;
+//let result = text.startsWith("a");
+let result = text.endsWith("gmail.com");
+if (result == false){
+document.getElementById("demo").innerHTML = "Enter A Valid Mail ID";
+return false();
+}
+else{
+document.getElementById("demo").innerHTML = "";
+
+return true();
+}
+
+//document.getElementById("demo").innerHTML = result;
+document.getElementById("demo1").innerHTML = result1;
+}
+
+</script>
+{% endblock %}

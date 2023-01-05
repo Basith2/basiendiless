@@ -1,0 +1,53 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+{% block title %}College Profile{% endblock %}
+{% block body %}
+<center><br><br><br>
+    <h1>College Profile</h1>
+    <div class="container">
+    <form role="form" name="frm" action="" method="post">
+        {% csrf_token %}
+        <div id="background">
+            {%if pic%}
+            <a href="../admin_college_profile_pic_update">
+            <img src="../static/myapp/media/{{pic}}" width="150" height="150">
+            </a>
+            {%else%}
+        <img src="../static/myapp/images/No_image_available.svg.png" width="150" height="150">
+            {%endif%}
+        <div class="profile">
+        {% for cd in college_details %}
+
+        <address>
+            {{ cd.c_name }}<br>
+            {{ cd.addr }},&nbsp;
+            {{ cd.pin }}<br>
+            Contact : {{ cd.contact }}<br>
+            Fax : {{ cd.fax }}<br>
+            Email : {{ cd.email }}<br>
+            Url : <a href="{{ cd.url }}" target="_blank" rel="noopener noreferrer">
+            <span style="font-size: 150%;color:black;">{{ cd.url }}</span></a>
+        </address>
+        {%endfor%}
+
+        </div>
+
+            {%if college_details%}
+            <a class="btn btn-primary" href="../admin_college_details_update">Edit</a>
+            {%else%}
+         <a class="btn btn-info" href="{%url 'admin_add_college_details'%}">Add College Details</a></h1>
+            {%endif%}
+            {%if pic%}
+            {%else%}
+            <a class="btn btn-primary" href="../admin_college_profile_pic_add">Add Image</a>
+            {%endif%}
+        </div>
+    </form>
+    </div>
+    <h3>{{msg}}</h3>
+</center>
+<style>
+    #background{background-image:url("{%static 'myapp/images/background1.jpg' %}");
+    width:50%;color:black;}
+</style>
+{% endblock %}

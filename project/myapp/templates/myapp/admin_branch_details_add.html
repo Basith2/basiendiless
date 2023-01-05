@@ -1,0 +1,32 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+{%block title%}Add Branch Details{%endblock%}
+{% block body %}
+<center><br><br><br>
+    <h1>Add Branch Details</h1>
+    <div class="container">
+    <form name="frm" role="form" action="{% url 'admin_branch_details_add'%}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="branch_name">Branch Name</label>
+            <input class="form-control" type="text" name="branch_name" id="branch_name" placeholder="Branch Name" required>
+        </div>
+        <div class="form-group">
+            <label for="branch_code">Branch Code</label>
+            <input class="form-control" type="text" name="branch_code" id="branch_code" placeholder="Branch Code">
+        </div>
+
+        <button type="submit"
+        class="btn btn-info" id="bt" name="bt">Add</button>
+        <button type="reset"
+        class="btn btn-info" id="rt" name="rt">Reset</button>
+    </form>
+    </div>
+    <h3>{{msg}}</h3>
+</center>
+<style>
+    .form-group{
+    width:50%;
+    }
+</style>
+{% endblock %}

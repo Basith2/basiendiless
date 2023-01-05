@@ -1,0 +1,132 @@
+{% extends 'myapp/alumni_base.html' %}
+{% load static %}
+{% block title %}Profile{% endblock %}
+{% block body %}
+<center><br><br><br><br>
+<!--    <h1>My Posts</h1>-->
+
+    <img src="../static/myapp/media/{{ul.pic}}" width="135px" height="135px"><br><br>
+    <h5>Name : &nbsp;<span>{{ul.name}}</span></h5>
+    <h5>Date of Birth : &nbsp;<span>{{ul.dob}}</span></h5>
+     <h5>Gender : &nbsp;<span>{{ul.gender}}</span></h5>
+    <h5>Address : &nbsp;<span>{{ul.addr}}</span>, Pin: <span>{{ul.pin}}</span></h5>
+    <h5>Contact : &nbsp;<span>{{ul.contact}}</span></h5>
+<br>
+    <h5>Batch  : &nbsp;<span>{{bd.branch_name}}({{bd.branch_code}}) [{{ul.pass_year}}]</span></h5>
+    <br>
+
+<div class="container">
+
+    <form role="form" name="frm" action="" method="post">
+        {% csrf_token %}
+        {%if j_list|length == 0%}
+        <h1>No Job Details Added</h1>
+        {%else%}
+        <h1>Job Details</h1><br>
+    <table class="table table-striped table-bordered" border="2px">
+            <thead style="text-align:center;">
+            <tr>
+
+                <th>Title</th>
+                <th>Company Name</th>
+                <th>Address</th>
+                <th>PIN</th>
+
+            </tr>
+            </thead>
+
+            {% for jl in j_list %}
+            <tbody style="text-align:center;">
+            <tr>
+
+                <td>{{ jl.job_title  }}</td>
+                <td>{{ jl.org_name  }}</td>
+                <td>{{ jl.org_addr  }}</td>
+                <td>{{ jl.pin  }}</td>
+            </tr>
+            <tbody>
+        </table>
+    {% endfor %}
+
+        {%endif%}
+
+    </form>
+</div>
+
+
+
+<br><br>
+                <body>
+        <div class="container">
+    <form role="form" name="frm" action="" method="post">
+        {% csrf_token %}
+	<section class="main-content">
+		<div class="container">
+<!--			<h1 class="text-center text-uppercase">Social Media Post</h1>-->
+
+
+{% for p in post_list %}
+			<div class="row">
+				<div class="col-sm-6 offset-sm-3">
+					<div class="post-block">
+						<div class="d-flex justify-content-between">
+							<div class="d-flex mb-3">
+                                {%for a in al_list%}
+                                {%if a.user_id == p.alumni_id%}
+
+
+
+								<div class="mr-2 ng-if">
+									<a href="#!" class="text-dark">
+                                        <img src="../static/myapp/media/{{a.pic}}" alt="User" class="author-img" >
+
+                                    </a>
+
+
+								</div>
+
+								<div>
+									<h5 class="mb-0"><a href="#!" class="text-dark">{{a.name}}</a></h5>
+
+								</div>
+                                {%endif%}
+                                {%endfor%}
+							</div>
+
+						</div>
+
+						<div class="post-block__content mb-2">
+                            <h5>{{p.title}}</h5>
+							<p>{{p.descr}}</p>
+							<a href="../static/myapp/media/{{p.pic_path}}">
+								<embed src="../static/myapp/media/{{p.pic_path}}" alt="Content img" >
+							</a>
+						</div>
+
+					</div>
+				</div>
+			</div>
+            {%endfor%}
+		</div>
+	</section>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="{%static 'myapp/assets1/css/style.css'%}">
+
+    </form>
+        </div>
+        </body>
+
+    <h3>{{msg}}</h3>
+</center>
+<style>
+	.post-block{border:2px solid blue;border-radius: 25px;width:100%}
+	.table{background-color:#92a898;}
+</style>
+{% endblock %}

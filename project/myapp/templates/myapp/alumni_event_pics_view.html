@@ -1,0 +1,46 @@
+{% extends 'myapp/alumni_base.html' %}
+{% load static %}
+
+{% block body %}
+<center><br><br><br><br>
+    <div class="div1">
+    <form name="frm" role="form" action="#" method="post">
+        {% csrf_token %}
+
+        {%for ep in pic_list%}
+<th>
+
+            <img src="../static/myapp/media/{{ ep.pic }}"  width="100" height="350">
+
+</th>
+<br><br><br><br><br>
+        {%endfor%}
+
+
+    </form>
+
+    </div>
+
+<h3>{{msg}}</h3>
+</center>
+<style>
+    .div-border{
+    border: 2px solid black;
+
+    }
+
+
+.div1{width:50%;}
+.container1 {
+
+    width: 60em;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+
+img{border:2px solid blue;border-radius: 25px;width:100%}
+
+
+</style>
+{% endblock %}

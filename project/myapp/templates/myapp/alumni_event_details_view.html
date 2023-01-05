@@ -1,0 +1,50 @@
+{% extends 'myapp/alumni_base.html' %}
+{% load static %}
+{% block title %}Event Details{% endblock %}
+{% block body %}
+<center><br><br><br><br>
+    <h1>Event Details</h1>
+    <div class="container">
+    <form role="form" name="frm" action="" method="post">
+        {% csrf_token %}
+        <table class="table table-border table-striped">
+            <thead style="background-color:black; color:white;">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Description</th>
+                <th>Date / Time</th>
+                <th>Action</th>
+
+            </tr>
+            </thead>
+            {% for ed in event_list %}
+            <tbody>
+            <tr>
+
+                <td>{{ ed.id }}</td>
+                <td>{{ ed.ename  }}</td>
+                <td><img src="../static/myapp/media/{{ed.pic_path}}" width="135px" height="135px"></td>
+                <td style="width=50%">{{ ed.description  }}</td>
+                <td>{{ ed.dt  }} / {{ ed.tm  }}</td>
+
+                <td>
+<!--                    <a href="../admin_event_details_edit?id={{ ed.id }}">Edit</a>&nbsp;-->
+                    <a class="btn btn-primary" href="../alumni_event_pics_view?id={{ ed.id }}">Pics</a>&nbsp;
+<!--                    <a href="../admin_event_details_delete?id={{ ed.id }}">Delete</a>&nbsp;-->
+                </td>
+
+            </tr>
+            <tbody>
+            {% endfor %}
+        </table>
+<!--         <a class="btn btn-primary" href="{%url 'admin_event_details_add'%}">Add Event</a></h1>-->
+    </form>
+    </div>
+    <h3>{{msg}}</h3>
+</center>
+<style>
+	.table{border-radius: 25px; width:100%; background-color:rgb(255, 215, 212, 0.7);}
+</style>
+{% endblock %}

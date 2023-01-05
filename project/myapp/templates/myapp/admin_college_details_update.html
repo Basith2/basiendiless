@@ -1,0 +1,46 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+{% block title %}College Details{% endblock %}
+{% block body %}
+<center><br><br><br>
+    <h2>College Details</h2>
+    <div class="container">
+    <form role="form" name="frm" action="{% url 'admin_college_details_update' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="c_name">Name</label>
+                <input class="form-control" type="text" id="c_name" name="c_name" value="{{cd.c_name}}">
+            </div>
+            <div class="form-group">
+                <label for="addr">Address</label>
+                <input class="form-control" type="text" id="addr" name="addr" value="{{cd.addr}}">
+            </div>
+        <div class="form-group">
+                <label for="pin">PIN</label>
+                <input class="form-control" type="text" id="pin" name="pin" value="{{cd.pin}}">
+        </div>
+        <div class="form-group">
+                <label for="contact1">CONTACT</label>
+                <input class="form-control" type="text" id="contact1" name="contact" value="{{cd.contact}}">
+        </div>
+
+        <div class="form-group">
+                <label for="pin">URL</label>
+                <input class="form-control" type="url" id="url" name="url" value="{{cd.url}}">
+        </div>
+        <div class="form-group">
+                <label for="pin">Email</label>
+                <input class="form-control" type="email" id="email" name="email" value="{{cd.email}}">
+        </div>
+
+            <button type="submit" class="btn btn-info" id="bt" name="bt">Add</button>
+            <button type="reset" class="btn btn-info" id="rt" name="rt">Reset</button>
+
+        </form>
+        {{msg}}
+        </div>
+</center>
+<style>
+    .form-group{width:50%;}
+</style>
+{% endblock %}

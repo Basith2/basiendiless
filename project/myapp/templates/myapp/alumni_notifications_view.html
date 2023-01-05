@@ -1,0 +1,22 @@
+{% extends 'myapp/alumni_base.html' %}
+{% load static %}
+{% block title %}Notifications{% endblock %}
+{% block body %}
+
+<center><br><br><br><br>
+    <h1>Birthdays..</h1>
+{% for msg_obj in msg_list %}
+
+    <h2>{{ msg_obj.name }}'s birthday is on {{ msg_obj.dob }}</h2>
+
+{%endfor%}
+    <br><br>
+    <h1>Events..</h1>
+{% for msg_obj in emsg_list %}
+
+    <h2>Event : {{ msg_obj.ename }} will end in {{ msg_obj.edt }}</h2>
+
+{%endfor%}
+
+</center>
+{%endblock%}

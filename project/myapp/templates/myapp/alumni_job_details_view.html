@@ -1,0 +1,66 @@
+{% extends 'myapp/alumni_base.html' %}
+{% load static %}
+{% block title %}Jobs{% endblock %}
+{% block body %}
+<center><br><br><br><br>
+    <h1>My Job</h1>
+    <div class="container">
+    <form role="form" name="frm" action="" method="post">
+        {% csrf_token %}
+        <table class="table table-striped " border="2px">
+            <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Company Name</th>
+                <th>Address</th>
+                <th>PIN</th>
+                <th>Action</th>
+
+            </tr>
+            </thead>
+            {% for jl in j_list %}
+            <tbody>
+            <tr>
+
+                <td>{{ jl.id  }}</td>
+                <td>{{ jl.job_title  }}</td>
+                <td>{{ jl.org_name  }}</td>
+                <td>{{ jl.org_addr  }}</td>
+                <td>{{ jl.pin  }}</td>
+
+                <td>
+                    <div class="btn-group-vertical">
+                    <a class="btn btn-outline-info" href="../alumni_job_details_edit?id={{ jl.id }}">Edit</a>
+                    <a class="btn btn-outline-danger" href="../alumni_job_details_delete?id={{ jl.id }}">Delete</a>
+                    </div>
+                </td>
+
+            </tr>
+            <tbody>
+            {% endfor %}
+        </table>
+         <a class="btn btn-primary" href="{%url 'alumni_job_details_add'%}">Add Job</a></h1>
+    </form>
+    </div>
+    {% if msg %}
+                    <div class="messages">
+                    {{ msg }}
+                    </div>
+ {% endif %}
+
+<script text="javascript">
+    setTimeout(fade_out, 1000);
+    function fade_out() {
+        $(".messages").fadeOut().empty();
+    }
+
+
+</script>
+<!--    <h3>{{msg}}</h3>-->
+</center>
+<style>
+    .table{background-color:#e0dede;}
+</style>
+
+{% endblock %}

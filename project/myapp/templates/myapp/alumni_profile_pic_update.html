@@ -1,0 +1,26 @@
+{% extends 'myapp/alumni_base.html' %}
+{% load static %}
+{% block title %}Change Profile pic Update{% endblock %}
+{% block body %}
+<center><br><br><br><br>
+        <h2>Change Picture</h2>
+<!--    <img src="{% static 'myapp/images/person.png'%}" width="150" height="150">-->
+    <div class="container">
+    <form role="form" name="frm" action="#" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="new_pic">Select New Image</label>
+                <input class="form-control" type="file" id="new_pic" name="new_pic" required>
+            </div>
+
+            <button type="submit" class="btn btn-info" id="bt" name="bt">Update</button>
+            <button type="reset" class="btn btn-info" id="rt" name="rt">Reset</button>
+
+        </form>
+        {{msg}}
+        </div>
+</center>
+<style>
+    .form-group{width:50%;}
+</style>
+{% endblock %}
